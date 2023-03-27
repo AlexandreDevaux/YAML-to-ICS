@@ -22,14 +22,14 @@ def day_name_to_weekday(day_name):
     }
     return mapping[day_name]
 
-def yaml_to_ics(yaml_string):
+def yaml_to_ics(yaml_string, nb_weeks):
     yaml_data = yaml.load(yaml_string, Loader=yaml.SafeLoader)
     cal = Calendar()
 
     # Customize this date as needed
     start_date = datetime(2023, 4, 10)
     # Customize this number as needed
-    num_weeks = 25
+    num_weeks = nb_weeks
     for week in range(num_weeks):
         for day, schedule in yaml_data.items():
             current_date = start_date + timedelta(weeks=week)
@@ -51,14 +51,15 @@ def yaml_to_ics(yaml_string):
         with open('schedule.ics', 'wb') as ics_file:
             ics_file.write(cal.to_ical())
 
-def main(input_file):
+def main(input_file, nb_weeks=1):
     with open(input_file, 'r', encoding='utf-8') as file:
         yaml_string = file.read()
-    yaml_to_ics(yaml_string)
+    yaml_to_ics(yaml_string, nb_weeks)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert a YAML schedule file to an ICS file.')
     parser.add_argument('input_file', help='Path to the YAML schedule file.')
+    parser.add_argument('--nb_weeks', type=int, default=1, help='Number of weeks to generate.')
 
     args = parser.parse_args()
     main(args.input_file)

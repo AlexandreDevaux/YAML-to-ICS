@@ -12,10 +12,11 @@ This Python script converts a YAML schedule file into an ICS (iCalendar) file th
     ````
 ## Usage
 - Create a YAML file with your schedule using the provided example format. Save it with a .yaml extension (e.g., my_schedule.yaml).
-- Run the script with the YAML file as the input:
-```bash
-python yaml_to_ics.py my_schedule.yaml
-```
+- Run the script with the YAML file as the input and optionally specify the number of weeks to generate:
+    ```bash
+    python yaml_to_ics.py my_schedule.yaml --nb_weeks 4
+    ```
+    In this example, the script will generate a schedule for 4 weeks. If `--nb_weeks` is not provided, the script will generate a schedule for the default value of 1 week.
 - The script will generate an ICS file named schedule.ics in the same directory.
 - Import the schedule.ics file into your preferred calendar application.
 ## YAML Schedule Format
